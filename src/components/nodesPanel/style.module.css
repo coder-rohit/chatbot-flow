@@ -28,3 +28,9 @@
     border: 1px solid blue;
     box-shadow: 0 0 10px rgb(207, 207, 207);
 }
+
+.nodeTitle{
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(197, 197, 197);
+}

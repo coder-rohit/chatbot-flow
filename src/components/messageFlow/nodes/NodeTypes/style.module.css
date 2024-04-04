@@ -1,0 +1,15 @@
+.customNoteTypeA{
+    padding: 0;
+    text-align: left;
+}
+
+.nodeTitleaBar{
+    text-align: left;
+    background-color: #b4efe3;
+    padding: 0px 10px;
+    font-weight: 500;
+}
+
+.nodeLabel{
+    padding: 10px;
+}

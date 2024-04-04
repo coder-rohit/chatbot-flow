@@ -1,0 +1,37 @@
+.nodeSettingPanelMain {
+    border: 1px solid rgb(197, 197, 197);
+    width: 30%;
+}
+
+.nodeTitle {
+    text-align: center;
+    padding: 10px;
+    border-bottom: 1px solid rgb(197, 197, 197);
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+
+.textArea {
+    padding: 10px;
+    border-bottom: 1px solid rgb(197, 197, 197);
+}
+
+.textArea textarea {
+    margin-top: 10px;
+    width: 96%;
+    height: 100px;
+    outline: 1px solid rgb(209, 209, 209);
+    border-radius: 5px;
+    outline: 1px solid rgb(173 173 173);
+    border-radius: 5px;
+    border: none;
+    padding: 10px 2%;
+    font-size: large;
+    font-weight: 600;
+}
+
+.textArea label {
+    font-weight: 500;
+    color: rgb(197, 197, 197);
+}

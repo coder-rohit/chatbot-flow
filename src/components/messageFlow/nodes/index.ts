@@ -1,38 +1,16 @@
 import type { Node, NodeTypes } from "reactflow";
-// import { PositionLoggerNode } from "./PositionLoggerNode";
+import NodeTypeA from "./NodeTypes/TypeA";
 
 export const initialNodes = [
   {
     id: "a",
-    type: "input",
+    type: "nodeTypeA",
     position: { x: 0, y: 0 },
     data: { label: "wixsre" },
-  },
-  {
-    id: "b",
-    position: { x: -100, y: 100 },
-    data: { label: "drag me!" },
-  },
-  {
-    id: "c",
-    position: { x: 100, y: 100 },
-    data: { label: "your ideas" },
-  },
-  {
-    id: "d",
-    type: "output",
-    position: { x: 0, y: 200 },
-    data: { label: "with React Flo 2w" },
-  },
-  {
-    id: "e",
-    type: "output",
-    position: { x: 0, y: 250 },
-    data: { label: "with React Flow 2" },
   },
 ] satisfies Node[];
 
 export const nodeTypes = {
-  // "position-logger": PositionLoggerNode,
+  "nodeTypeA": NodeTypeA,
   // Add any of your custom nodes here!
 } satisfies NodeTypes;

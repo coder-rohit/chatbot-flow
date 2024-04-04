@@ -1,22 +1,30 @@
 import type { OnConnect } from "reactflow";
 import { useCallback, useRef, useState } from "react";
-import { ReactFlow, addEdge, useNodesState, useEdgesState, Background, ReactFlowProvider } from "reactflow";
+import { ReactFlow, addEdge, useNodesState, useEdgesState, Background, ReactFlowProvider, MarkerType } from "reactflow";
 import "reactflow/dist/style.css";
 import { initialNodes, nodeTypes } from "./nodes";
 import { initialEdges, edgeTypes } from "./edges";
 import style from "./style.module.css"
 
-export default function MainComponent() {
+export default function MainComponent({nodes, setNodes, onNodesChange}:any) {
 
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+  // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
 
   const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
 
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-  
+
+  console.log(edges)
+
   const onConnect: OnConnect = useCallback(
-    (connection) => setEdges((edges) => addEdge(connection, edges)),
-    [setEdges]
+    (connection) => {
+      const updatedEdges = edges.map(edge => ({
+        ...edge,
+        markerEnd: { type: MarkerType.ArrowClosed }
+      }));
+      setEdges(addEdge(connection, updatedEdges));
+    },
+    [edges, setEdges]
   );
   const reactFlowWrapper = useRef<any>(null);
 
@@ -30,17 +38,16 @@ export default function MainComponent() {
     });
     const newNode: any = {
       id: `${type}-${Date.now()}`,
-      // type: type,
+      type: "nodeTypeA",
       position: position,
       data: { label: "New Message" },
     };
-    setNodes((nds) => nds.concat(newNode));
+    setNodes((nds: string | any[]) => nds.concat(newNode));
   };
 
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
-
   };
 
   return (
@@ -50,7 +57,7 @@ export default function MainComponent() {
         ref={reactFlowWrapper}
         onDrop={onDrop}
         onDragOver={handleDragOver}
-        >
+      >
         <ReactFlow
           nodes={nodes}
           nodeTypes={nodeTypes}
