@@ -23,15 +23,22 @@ const initialState: NodeInterface[] = [
         position: { x: 0, y: 0 },
         data: { label: "wixsre" },
     },
+    {
+        id: "b",
+        type: "input",
+        position: { x: 200, y: 0 },
+        data: { label: "wixsre" },
+    },
 ]
 
 export const nodeSlice = createSlice({
     name: 'node',
     initialState,
     reducers: {
-        addNewNode: (state, action: PayloadAction<NodeInterface>) => {
-            console.log(action.payload)
-            console.log(initialState)
+        addNewNode: (state:any, action: PayloadAction<NodeInterface>) => {
+            // console.log(action.payload)
+            console.log(state)
+            state = [...state, action.payload]
         },
     },
 })

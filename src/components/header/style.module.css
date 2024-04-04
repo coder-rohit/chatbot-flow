@@ -1,0 +1,48 @@
+.headerMain {
+    height: 7%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    background-color: #e8e8e8;
+}
+
+.saveButton {
+    padding: 10px 14px;
+    background-color: #fff;
+    border: 1px solid rgb(0, 0, 214);
+    border-radius: 4px;
+    font-weight: 600;
+    color: rgb(0, 0, 163);
+    transition: 0.3s;
+}
+
+.saveButton:hover{
+    /* background-color: #b3b3b3; */
+    border: 1px solid blue;
+    cursor: pointer;
+    color: blue;
+    box-shadow: 0 0 10px rgb(168, 168, 168);
+}
+
+.alertMessage {
+    padding: 14px 14px;
+    background-color: #ff9e9e;
+    border: none;
+    border-radius: 4px;
+    font-weight: 600;
+    color: black;
+}
+
+.flowSide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 70%;
+}
+
+.nodePanelSide{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 30%;
+}

@@ -10,3 +10,19 @@ body,
   height: 100%;
   margin: 0;
 }
+.reactFlowMainClass {
+  height: 100%;
+  margin: 0;
+  width: 60%;
+}
+
+.playArea{
+  height: 93%;
+  display: flex;
+}
+
+.deactivateNode{
+  border-color: grey !important;
+  color: grey !important;
+  cursor: not-allowed !important;
+}

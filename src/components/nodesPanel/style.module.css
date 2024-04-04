@@ -1,0 +1,30 @@
+.nodePanelMain{
+    border: 1px solid rgb(197, 197, 197);
+    width: 30%;
+}
+
+.nodesStack{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    flex-wrap: wrap;
+}
+
+.nodeBox{
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid blue;
+    border-radius: 5px;
+    width: 49%;
+    padding: 15px 0;
+    margin-bottom: 7px;
+    transition: 0.3s;
+}
+
+.nodeBox:not(.deactivateNode):hover {
+    border: 1px solid blue;
+    box-shadow: 0 0 10px rgb(207, 207, 207);
+}
