@@ -8,6 +8,8 @@ import NodeSettingsPanel from './components/nodeSettings';
 import { initialNodes } from './components/messageFlow/nodes';
 import { useEdgesState, useNodesState } from 'reactflow';
 import { initialEdges } from './components/messageFlow/edges';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const noteSettingData = useSelector((state: RootState) => state.nodeReducer)
@@ -16,14 +18,16 @@ function App() {
 
   return (
     <>
-    <Header/>
-      <div className="playArea"> 
-        <MainComponent nodes={nodes} setNodes={setNodes} onNodesChange={onNodesChange} edges={edges} setEdges={setEdges} onEdgesChange={onEdgesChange}/>
+      <ToastContainer />
+
+      <Header nodes={nodes} edges={edges} />
+      <div className="playArea">
+        <MainComponent nodes={nodes} setNodes={setNodes} onNodesChange={onNodesChange} edges={edges} setEdges={setEdges} onEdgesChange={onEdgesChange} />
         {
-          (noteSettingData.showSettingPanel)?
-          <NodeSettingsPanel nodes={nodes} setNodes={setNodes} onNodesChange={onNodesChange}/>
-          :
-          <NodesPanel />
+          (noteSettingData.showSettingPanel) ?
+            <NodeSettingsPanel nodes={nodes} setNodes={setNodes} onNodesChange={onNodesChange} />
+            :
+            <NodesPanel />
         }
       </div>
     </>

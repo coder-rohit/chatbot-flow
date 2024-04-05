@@ -5,8 +5,8 @@ export const initialNodes = [
   {
     id: "a",
     type: "nodeTypeA",
-    position: { x: 0, y: 0 },
-    data: { label: "wixsre" },
+    position: { x: 200, y: 0 },
+    data: { label: "First Node" },
   },
 ] satisfies Node[];
 

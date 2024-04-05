@@ -25,7 +25,6 @@ export const nodeSlice = createSlice({
     },
 })
 
-// Action creators are generated for each case reducer function
 export const { changeData } = nodeSlice.actions
 
 export default nodeSlice.reducer

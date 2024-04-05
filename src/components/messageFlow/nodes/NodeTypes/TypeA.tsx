@@ -3,6 +3,7 @@ import { Handle, Position, useNodeId } from "reactflow";
 import style from "./style.module.css"
 import { useDispatch } from "react-redux";
 import { changeData } from "../../../../redux/reducer/nodesSlice";
+import { useState } from "react";
 
 function NodeTypeA({
   data,
@@ -18,9 +19,15 @@ function NodeTypeA({
     }))
   }
 
+  const [sourceEdges, setSourceEdges] = useState<any>([]);
+
   const checkConn = (c: any) => {
-    console.log(c)
-    return true
+    setSourceEdges([...sourceEdges, c.source]);
+    if (sourceEdges.includes(c.source)) {
+      return false
+    } else {
+      return true
+    }
   }
 
   return (

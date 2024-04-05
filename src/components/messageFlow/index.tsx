@@ -1,27 +1,22 @@
 import type { OnConnect } from "reactflow";
 import { useCallback, useRef, useState } from "react";
-import { ReactFlow, addEdge, useNodesState, useEdgesState, Background, ReactFlowProvider, MarkerType } from "reactflow";
+import { ReactFlow, addEdge, Background, ReactFlowProvider, MarkerType } from "reactflow";
 import "reactflow/dist/style.css";
-import { initialNodes, nodeTypes } from "./nodes";
-import { initialEdges, edgeTypes } from "./edges";
+import { nodeTypes } from "./nodes";
+import { edgeTypes } from "./edges";
 import style from "./style.module.css"
 
-export default function MainComponent({nodes, setNodes, onNodesChange}:any) {
-
-  // const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
+export default function MainComponent({nodes, setNodes, onNodesChange, edges, setEdges, onEdgesChange}:any) {
 
   const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
 
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
-
-  console.log(edges)
-
   const onConnect: OnConnect = useCallback(
-    (connection) => {
-      const updatedEdges = edges.map(edge => ({
+    (connection: any) => {
+      const updatedEdges = edges.map((edge:any) => ({
         ...edge,
         markerEnd: { type: MarkerType.ArrowClosed }
       }));
+      connection.markerEnd  = { type: MarkerType.ArrowClosed }
       setEdges(addEdge(connection, updatedEdges));
     },
     [edges, setEdges]
@@ -40,7 +35,7 @@ export default function MainComponent({nodes, setNodes, onNodesChange}:any) {
       id: `${type}-${Date.now()}`,
       type: "nodeTypeA",
       position: position,
-      data: { label: "New Message" },
+      data: { label: "Click to edit" },
     };
     setNodes((nds: string | any[]) => nds.concat(newNode));
   };

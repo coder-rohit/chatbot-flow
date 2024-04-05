@@ -1,11 +1,4 @@
-import { MarkerType, type Edge, type EdgeTypes } from "reactflow";
-
-const customEdge = {
-  // ... other properties
-  markerEnd: {
-    type: MarkerType.ArrowClosed,
-  },
-};
+import { type Edge, type EdgeTypes } from "reactflow";
 
 export const initialEdges = [
 
