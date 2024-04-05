@@ -8,10 +8,15 @@ import { useState } from "react";
 function NodeTypeA({
   data,
 }: NodeProps<any>) {
+  
+  // getting node id
   const nodeId = useNodeId();
+
   const dispatch = useDispatch()
 
   function handleNodeClick() {
+    // sending data to redux store to let application know which node is clicked
+    // opening setting panel for that particular node 
     dispatch(changeData({
       showSettingPanel: true,
       nodeID: nodeId,
@@ -19,10 +24,12 @@ function NodeTypeA({
     }))
   }
 
+  // saving new edges here also
   const [sourceEdges, setSourceEdges] = useState<any>([]);
 
   const checkConn = (c: any) => {
     setSourceEdges([...sourceEdges, c.source]);
+    // check to make sure source handle do not have any existing target assigned to it, because a source handle can have only one edge originating from it
     if (sourceEdges.includes(c.source)) {
       return false
     } else {

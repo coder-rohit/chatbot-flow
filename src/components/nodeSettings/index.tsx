@@ -8,6 +8,7 @@ import { changeData } from '../../redux/reducer/nodesSlice';
 
 function NodeSettingsPanel({ nodes, setNodes }: any) {
 
+  // get node data from redux store
   const nodeSettingData = useSelector((state: RootState) => state.nodeReducer)
   const dispatch = useDispatch()
 
@@ -15,16 +16,19 @@ function NodeSettingsPanel({ nodes, setNodes }: any) {
 
   const handleNodeChange = (newLabel: string) => {
     setNewNodeName(newLabel)
+    // changing node data (label on node)
     const updatedArray = nodes.map((item: any) => {
       if (item.id === nodeSettingData.nodeID) {
         return { ...item, data: { label: newLabel } };
       }
       return item;
     })
+    // setting updated node to node state
     setNodes(updatedArray)
   }
 
   function handleBackButtonClick() {
+    // sending data to redux store to toggle between node panel and node settings 
     dispatch(changeData({
       showSettingPanel: false,
       nodeID: 0,
@@ -32,10 +36,10 @@ function NodeSettingsPanel({ nodes, setNodes }: any) {
     }))
   }
 
+  // setting initial node label for input tag
   useEffect(() => {
     setNewNodeName(nodeSettingData.nodeName)
   }, [nodeSettingData.nodeName])
-
 
   return (
     <div className={style.nodeSettingPanelMain}>

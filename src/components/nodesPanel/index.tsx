@@ -11,6 +11,8 @@ function NodesPanel() {
     active: boolean
   }
 
+  // all nodes to show in node panel
+  // only node with active field true are useable rest will be disabled
   let nodeTypes: nodeTypeType[] = [
     {
       id: 1,
@@ -49,7 +51,9 @@ function NodesPanel() {
     },
   ]
 
-  const handleDragStart = (e: any, nodeName:string) => {
+  // function to handle drag from node panel
+  const handleDragStart = (e: any, nodeName: string) => {
+    // for data transfer, to let reactflow know which node is being dragged
     e.dataTransfer.setData('application/reactflow', nodeName);
     e.dataTransfer.effectAllowed = 'move';
   }
@@ -61,11 +65,11 @@ function NodesPanel() {
         {
           nodeTypes.map((item: nodeTypeType, key: number) => {
             return (
-              <div key={key} className={`${style.nodeBox} ${(!item.active) && "deactivateNode"}`} draggable={(item.active)?true:false} onDragStart={(e)=>handleDragStart(e, item.nodeName)}>
-                <IconContext.Provider value={{ color: (item.active)?"blue":"grey", size: "26px", className: "global-class-name" }}>
+              <div key={key} className={`${style.nodeBox} ${(!item.active) && "deactivateNode"}`} draggable={(item.active) ? true : false} onDragStart={(e) => handleDragStart(e, item.nodeName)}>
+                <IconContext.Provider value={{ color: (item.active) ? "blue" : "grey", size: "26px", className: "global-class-name" }}>
                   {item.icon}
                 </IconContext.Provider>
-                <span style={{color: (item.active)?"blue":"grey", marginTop: "10px"}}>{item.nodeName}</span>
+                <span style={{ color: (item.active) ? "blue" : "grey", marginTop: "10px" }}>{item.nodeName}</span>
               </div>
             )
           })

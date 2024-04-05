@@ -12,5 +12,4 @@ export const initialNodes = [
 
 export const nodeTypes = {
   "nodeTypeA": NodeTypeA,
-  // Add any of your custom nodes here!
 } satisfies NodeTypes;

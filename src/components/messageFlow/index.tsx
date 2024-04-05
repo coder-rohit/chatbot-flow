@@ -10,12 +10,14 @@ export default function MainComponent({ nodes, setNodes, onNodesChange, edges, s
 
   const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
 
+  // creating edges
   const onConnect: OnConnect = useCallback(
     (connection: any) => {
       const updatedEdges = edges.map((edge: any) => ({
         ...edge,
         markerEnd: { type: MarkerType.ArrowClosed }
       }));
+      // for all edges to have arrowed end
       connection.markerEnd = { type: MarkerType.ArrowClosed }
       setEdges(addEdge(connection, updatedEdges));
     },
@@ -23,6 +25,7 @@ export default function MainComponent({ nodes, setNodes, onNodesChange, edges, s
   );
   const reactFlowWrapper = useRef<any>(null);
 
+  // creating nodes
   const onDrop = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
@@ -31,20 +34,24 @@ export default function MainComponent({ nodes, setNodes, onNodesChange, edges, s
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top,
     });
+    // creating new node data
     const newNode: any = {
       id: `${type}-${Date.now()}`,
       type: "nodeTypeA",
       position: position,
       data: { label: "Click to edit" },
     };
+    // setting new nodes
     setNodes((nds: string | any[]) => nds.concat(newNode));
   };
 
+  // saving new node position while dragging over flow
   const handleDragOver = (event: React.DragEvent<HTMLDivElement>) => {
     event.preventDefault();
     event.dataTransfer.dropEffect = 'move';
   };
 
+  // function to clear all nodes and edges, executed when clicked on clear Button
   const clearNodes = () => {
     setNodes([])
     setEdges([])

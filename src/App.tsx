@@ -14,7 +14,9 @@ import { useEffect, useState } from 'react';
 import { getDataFromEdgesTable, getDataFromNodesTable, openDatabase } from './indexedDB';
 
 function App() {
+
   const noteSettingData = useSelector((state: RootState) => state.nodeReducer)
+  
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
@@ -22,7 +24,7 @@ function App() {
 
   useEffect(()=>{
     if(db){
-
+      // getting saved nodes and edges from indexed db and setting them in state
       async function getAllDataFromLocal(){
         let nodes = await getDataFromNodesTable(db)
         let edges = await getDataFromEdgesTable(db)
@@ -37,12 +39,12 @@ function App() {
   }, [db, setNodes, setEdges])
 
   useEffect(() => {
+    // creating indexed db connection and settimng it to state to be used throughtout the app 
     async function connectToDB() {
       let db:any = await openDatabase()
       setDB(db)
     }
     if(db === null){
-
       connectToDB()
     }
     return () => {
@@ -56,7 +58,6 @@ function App() {
   return (
     <>
       <ToastContainer />
-
       <Header nodes={nodes} edges={edges} db={db}/>
       <div className="playArea">
         <MainComponent nodes={nodes} setNodes={setNodes} onNodesChange={onNodesChange} edges={edges} setEdges={setEdges} onEdgesChange={onEdgesChange} />
