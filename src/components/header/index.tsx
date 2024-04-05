@@ -1,13 +1,14 @@
 import { Bounce, toast } from 'react-toastify';
 import style from './style.module.css'
+import { addDataToEdgesTable, addDataToNodesTable, openDatabase } from '../../indexedDB';
 
-function Header({ edges, nodes }: any) {
+function Header({ edges, nodes, db }: any) {
 
   const saveFlowCheck = async () => {
     let emptyTargetCount = 0
     for (let i = 0; i < nodes.length; i++) {
       let x = edges.findIndex((item: any) => item.target === nodes[i].id)
-      if(x === -1){
+      if (x === -1) {
         emptyTargetCount++
       }
     }
@@ -17,7 +18,14 @@ function Header({ edges, nodes }: any) {
 
   const saveChanges = async () => {
     if (await saveFlowCheck()) {
-      
+      // let db = openDatabase()
+
+      nodes.id = 0
+      edges.id = 0
+      await addDataToNodesTable(db, nodes)
+      await addDataToEdgesTable(db, edges)
+
+
       toast.success('Flow Saved to Local Storage', {
         position: "top-center",
         autoClose: 5000,
@@ -30,6 +38,7 @@ function Header({ edges, nodes }: any) {
         transition: Bounce,
       });
     } else {
+
       toast.error('Cannot Save Flow', {
         position: "top-center",
         autoClose: 5000,

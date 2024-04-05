@@ -59,7 +59,7 @@ function NodesPanel() {
 
   return (
     <div className={style.nodePanelMain}>
-      <div className={style.nodeTitle}>Nodes</div>
+      <div className={style.nodeTitle}>Nodes Panel</div>
       <div className={style.nodesStack}>
         {
           nodeTypes.map((item: nodeTypeType, key: number) => {

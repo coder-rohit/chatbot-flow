@@ -6,17 +6,17 @@ import { nodeTypes } from "./nodes";
 import { edgeTypes } from "./edges";
 import style from "./style.module.css"
 
-export default function MainComponent({nodes, setNodes, onNodesChange, edges, setEdges, onEdgesChange}:any) {
+export default function MainComponent({ nodes, setNodes, onNodesChange, edges, setEdges, onEdgesChange }: any) {
 
   const [reactFlowInstance, setReactFlowInstance] = useState<any>(null);
 
   const onConnect: OnConnect = useCallback(
     (connection: any) => {
-      const updatedEdges = edges.map((edge:any) => ({
+      const updatedEdges = edges.map((edge: any) => ({
         ...edge,
         markerEnd: { type: MarkerType.ArrowClosed }
       }));
-      connection.markerEnd  = { type: MarkerType.ArrowClosed }
+      connection.markerEnd = { type: MarkerType.ArrowClosed }
       setEdges(addEdge(connection, updatedEdges));
     },
     [edges, setEdges]
@@ -45,6 +45,11 @@ export default function MainComponent({nodes, setNodes, onNodesChange, edges, se
     event.dataTransfer.dropEffect = 'move';
   };
 
+  const clearNodes = () => {
+    setNodes([])
+    setEdges([])
+  }
+
   return (
     <ReactFlowProvider>
       <div
@@ -53,6 +58,7 @@ export default function MainComponent({nodes, setNodes, onNodesChange, edges, se
         onDrop={onDrop}
         onDragOver={handleDragOver}
       >
+        <div onClick={clearNodes} className={style.clearAllDiv}>Clear All</div>
         <ReactFlow
           nodes={nodes}
           nodeTypes={nodeTypes}

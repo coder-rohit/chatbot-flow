@@ -10,17 +10,50 @@ import { useEdgesState, useNodesState } from 'reactflow';
 import { initialEdges } from './components/messageFlow/edges';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { useEffect, useState } from 'react';
+import { getDataFromEdgesTable, getDataFromNodesTable, openDatabase } from './indexedDB';
 
 function App() {
   const noteSettingData = useSelector((state: RootState) => state.nodeReducer)
   const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
   const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
 
+  const [db, setDB] = useState<any>(null);
+
+  useEffect(()=>{
+    if(db){
+
+      async function getAllDataFromLocal(){
+        let nodes = await getDataFromNodesTable(db)
+        let edges = await getDataFromEdgesTable(db)
+        delete nodes[0].id;
+        delete edges[0].id;
+        setNodes(nodes[0])
+        setEdges(edges[0])
+      }
+      getAllDataFromLocal()
+    }
+      
+  }, [db])
+
+  useEffect(() => {
+    async function connectToDB() {
+      let db:any = await openDatabase()
+      setDB(db)
+    }
+    connectToDB()
+    return () => {
+      if (db) {
+        db.close();
+      }
+    };
+  }, [])
+
   return (
     <>
       <ToastContainer />
 
-      <Header nodes={nodes} edges={edges} />
+      <Header nodes={nodes} edges={edges} db={db}/>
       <div className="playArea">
         <MainComponent nodes={nodes} setNodes={setNodes} onNodesChange={onNodesChange} edges={edges} setEdges={setEdges} onEdgesChange={onEdgesChange} />
         {
