@@ -34,20 +34,24 @@ function App() {
       getAllDataFromLocal()
     }
       
-  }, [db])
+  }, [db, setNodes, setEdges])
 
   useEffect(() => {
     async function connectToDB() {
       let db:any = await openDatabase()
       setDB(db)
     }
-    connectToDB()
+    if(db === null){
+
+      connectToDB()
+    }
     return () => {
       if (db) {
         db.close();
       }
     };
-  }, [])
+  
+  }, [])// eslint-disable-line
 
   return (
     <>

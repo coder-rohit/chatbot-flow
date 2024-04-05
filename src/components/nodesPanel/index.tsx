@@ -2,9 +2,7 @@ import style from "./style.module.css"
 import { AiOutlineMessage } from "react-icons/ai";
 import { IconContext } from 'react-icons';
 
-
 function NodesPanel() {
-
   interface nodeTypeType {
     id: number,
     nodeName: string,
@@ -52,7 +50,6 @@ function NodesPanel() {
   ]
 
   const handleDragStart = (e: any, nodeName:string) => {
-    // console.log(e)
     e.dataTransfer.setData('application/reactflow', nodeName);
     e.dataTransfer.effectAllowed = 'move';
   }

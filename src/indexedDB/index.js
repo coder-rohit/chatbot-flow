@@ -15,8 +15,8 @@ export const openDatabase = () => {
 
         request.onupgradeneeded = function (event) {
             db = event.target.result;
-            const objectStore1 = db.createObjectStore('nodesTable', { keyPath: 'id' });
-            const objectStore2 = db.createObjectStore('edgesTable', { keyPath: 'id' });
+            db.createObjectStore('nodesTable', { keyPath: 'id' });
+            db.createObjectStore('edgesTable', { keyPath: 'id' });
             resolve(db);
         };
     });
@@ -63,7 +63,6 @@ export const addDataToEdgesTable = (db, data) => {
     return new Promise((resolve, reject) => {
         const transaction = db.transaction(['edgesTable'], 'readwrite');
         const store = transaction.objectStore('edgesTable');
-        console.log(data)
         const request = store.put(data);
         request.onerror = function (event) {
             console.error("Error adding data: ", event.target.error);

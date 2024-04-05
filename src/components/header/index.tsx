@@ -1,6 +1,6 @@
 import { Bounce, toast } from 'react-toastify';
 import style from './style.module.css'
-import { addDataToEdgesTable, addDataToNodesTable, openDatabase } from '../../indexedDB';
+import { addDataToEdgesTable, addDataToNodesTable } from '../../indexedDB';
 
 function Header({ edges, nodes, db }: any) {
 
@@ -18,14 +18,10 @@ function Header({ edges, nodes, db }: any) {
 
   const saveChanges = async () => {
     if (await saveFlowCheck()) {
-      // let db = openDatabase()
-
       nodes.id = 0
       edges.id = 0
       await addDataToNodesTable(db, nodes)
       await addDataToEdgesTable(db, edges)
-
-
       toast.success('Flow Saved to Local Storage', {
         position: "top-center",
         autoClose: 5000,
