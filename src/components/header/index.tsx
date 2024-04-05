@@ -35,7 +35,7 @@ function Header({ edges, nodes, db }: any) {
       });
     } else {
 
-      toast.error('Cannot Save Flow', {
+      toast.error('Cannot Save Flow because more than one Node has empty target handles', {
         position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
